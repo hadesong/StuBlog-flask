@@ -1,0 +1,107 @@
+{% extends 'admin_base.html' %} {% block content %}
+<script src="{{url_for('static' , filename='tinymce/tinymce.min.js')}}"></script>
+<script type="text/javascript">
+document.getElementById('admin_post').className = 'list-group-item active';
+
+</script>
+<div class="btn-toolbar" role="toolbar">
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#wriet">
+            <span class="glyphicon glyphicon-pencil"></span> 写文章
+        </button>
+    </div>
+    <div class="btn-toolbar" role="toolbar">
+        <div class="btn-group" role="group">
+            <button type="button" onclick="check()" class="btn btn-default">批量删除</button>
+            <button type="button" class="btn btn-default">未定</button>
+            <button type="button" class="btn btn-default">未定</button>
+        </div>
+    </div>
+</div>
+<br>
+<div id="post_list">
+    <ul class="list-group">
+        <li style="position:relative;" class="list-group-item active">
+            <input name="checkall" id="checkall" onclick="reserveCheck('choice')" type="checkbox" style="position:absolute">
+            <p style="position:absolute;margin-left:32px">标题</p>
+            <p style="position:absolute ;margin-left:54%">时间</p>
+            <p style="position:absolute ;margin-left:84%">操作</p>
+            <br>
+        </li>
+        {% for con in connent[::] %}
+        <li class="list-group-item" style="position:relative">
+            <input name="checkbox" type="checkbox" style="position:absolute" value="{{con[0]}}">
+            <span hidden="hidden" id="hidden{{con[0]}}">{{con[0]}}</span>
+            <p style="position:absolute;margin-left:30px"><a target="_blank" href="post?id={{con[0]}}">{{con[1]}} </a> </p>
+            <p style="position:absolute ;margin-left:50%"> {{con[2]}}</p>
+            <p style="position:absolute ;margin-left:80%">
+                <button type="button" id="modify_button" class="btn btn-default" data-toggle="modal" onclick="func({{con[0]}})" data-target="#modify">修改</button>
+                <button type="button" id="delete_button{{con[0]}}" class="btn btn-primar" data-toggle="modal" data-target="#delet{{con[0]}}">删除</button>
+            </p>
+            <br>
+            <br>
+        </li>
+        <div class="modal fade bs-example-modal-sm" id="delet{{con[0]}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="margin:0 auto;">
+                    <h2 style="text-align:center;">确定删除?</h2>
+                    <a href="/delete?id={{con[0]}}" style="margin-left:100px;" class="btn btn-danger">是 </a>
+                    <span style="margin-right:90px;" data-dismiss="modal" class="btn btn-default"> 否</span>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </ul>
+</div>
+<!-- Large modal -->
+<form action="write" method="post">
+    <div class="modal fade bs-example-modal-lg" id="wriet" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" style="width:90%">
+            <div class="modal-content">
+                <h2 style="margin-left: 40px; width:40%"><b>新文章</b></h2>
+                <input type="text" class="form-control" name="title" style="margin-left: 40px; width:40%" placeholder="文章标题">
+                <br>
+                <script>
+                tinymce.init({
+                    selector: 'textarea'
+                });
+
+                </script>
+                <div style="width:93% ; margin-left:40px;">
+                    <textarea style="width:40%" name="text"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<span class="load"></span>
+<span id="temp_check_value" hidden="hidden"></span>
+<span id="modify_span"></span>
+<div class="modal fade bs-example-modal-sm" id="selec_nothing" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <h2 style="text-align:center;">没有选择任何文章</h2>
+            <br>
+            <br>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-example-modal-sm" id="delet_all" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" style="margin:0 auto;">
+            <h2 style="text-align:center;">这..都不要了?</h2>
+            <button style="margin-left:100px;" id='s_delet_all' class="btn btn-danger">是 </button>
+            <span style="margin-right:90px;" data-dismiss="modal" class="btn btn-default"> 否</span>
+            <br>
+            <br>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

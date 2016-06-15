@@ -1,0 +1,79 @@
+{% extends 'base.html'%} {% block body%}
+<div id="post">
+    {% for row in connent %}
+    <div class="well" style="position:relative;overflow: auto; ">
+        <h3 style=""><a href="post?id={{row[0]}}">
+        <span class="glyphicon glyphicon-bookmark"></span> {{ row[1]}}</a></h3>
+        <h5 style="margin-left:30px;word-wrap: break-word; word-break: normal; " >{{row[3][0:150] }}</h5>
+        <h6 style="float:right"><span class="glyphicon glyphicon-time">&nbsp;</span>{{row[2]}}</h6>
+    </div>
+    {% endfor %}
+
+<nav>
+  <ul class="pager">
+    <li><a href="javascript:next_p()">下一页</a></li>
+  </ul>
+</nav>
+</div>
+<span id="page_now" hidden="hidden">0</span>
+<script type="text/javascript">
+function next_p() {
+var nowpage = parseInt(document.getElementById('page_now').innerHTML)
+    //alert(num);
+    $.ajax({
+        url: "/",
+        type: "POST",
+        data: {
+            "page_now": nowpage+1,
+        },
+        beforeSend: function() {
+            $('.load').html('').appendTo("body")
+        },
+        complete: function(data) {
+            $('#page_now').text(nowpage+1).appendTo("body")
+        },
+        success: function(data) {
+            //获取后台的结果替换modify_span标签
+            $('#post').html(data);
+            //移动到页面顶部(ajax在页面下端获取数据后不刷新 ,导致页面是从中间开始的 ..)
+            $('body,html').animate({
+                scrollTop: 0
+            }, 1000);
+        },
+        error: function(data) {
+            alert("数据异常！");
+        }
+    });
+}
+function prev_p() {
+var nowpage = parseInt(document.getElementById('page_now').innerHTML)
+    //alert(num);
+    $.ajax({
+        url: "/",
+        type: "POST",
+        data: {
+            "page_now":nowpage-1,
+        },
+        beforeSend: function() {
+            $('.load').html('').appendTo("body")
+        },
+        complete: function(data) {
+            $('#page_now').text(nowpage-1).appendTo("body")
+        },
+        success: function(data) {
+            //获取后台的结果替换modify_span标签
+            $('#post').html(data);
+            //移动到页面顶部(ajax在页面下端获取数据后不刷新 ,导致页面是从中间开始的 ..)
+            $('body,html').animate({
+                scrollTop: 0
+            }, 1000);
+        },
+        error: function(data) {
+            alert("数据异常！");
+        }
+    });
+}
+</script>
+</script>
+{% endblock %}
+

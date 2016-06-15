@@ -1,0 +1,20 @@
+{% extends 'base.html'%} {% block body%}
+<script src="{{url_for('static' , filename='js.js')}}"></script>
+{% for row in content[::-1] %}
+<div class="well">
+    <h3><span class="glyphicon glyphicon-bookmark"></span> {{ row[1]}}</a></h3>
+    <h6><span class="glyphicon glyphicon-time">&nbsp;</span>{{row[2]}}</h6>
+    <hr>
+    <!--强制换行样式.. -->
+    <h5 style="word-wrap:break-word; word-break:normal;">{{row[3] |safe }}</h5>
+</div>
+<nav>
+    <ul class="pager">
+        {{previous |safe }} {{next |safe }}
+    </ul>
+</nav>
+<!-- 多说评论框 start -->
+<div class="ds-thread" data-thread-key="{{row[0]}}" data-title="{{row[1]}}" data-url="<script type='text/javascript'>document.domain;</script>"></div>
+<!-- 多说评论框 end -->
+{% endfor %} {% endblock %}
+

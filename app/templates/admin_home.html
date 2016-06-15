@@ -1,0 +1,129 @@
+ {% extends 'admin_base.html' %} {% block content %}
+<script type="text/javascript">
+document.getElementById('admin_home').className = 'list-group-item active';
+
+</script>
+<script src="http://cdn.bootcss.com/echarts/3.1.10/echarts.min.js"></script>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div style="position:relative;overflow: auto;">
+<div id="main" style="width:40%;height:300px;float:left;"></div>
+<div id="main1" style="width:40%;height:300px;float:right;"></div>
+</div>
+<br>
+<hr>
+<div>
+    <div id="box" style="background-color:#DACFC9;margin-left:4%"><b>原创:</b>
+        <h1 align="right">{{  postnumber }} </h1></div>
+    <div id="box" style="background-color:#24A9E1;margin-left:4%"><b>转载:</b>
+        <h1 align="right">43</h1></div>
+    <div id="box" style="background-color:#FC9D99;margin-left:4%"><b>翻译:</b>
+        <h1 align="right">1</h1></div>
+    <div id="box" style="background-color:#F4DE29;margin-left:4%"><b>评论:</b>
+        <h1 align="right">8</h1></div>
+    <div id="box" style="background-color:#608F9F;margin-left:4%"><b>总访问量:</b>
+        <h1 align="right">12348</h1></div>
+</div>
+<script type="text/javascript">
+// 基于准备好的dom，初始化echarts实例
+var myChart = echarts.init(document.getElementById('main'));
+
+// 指定图表的配置项和数据
+option = {
+    title: {
+        text: '本周访问量',
+        subtext: '纯属虚构'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data: ['百次']
+    },
+    toolbox: {
+        show:false,
+        feature: {
+            dataZoom: {},
+            dataView: {
+                readOnly: false
+            },
+            magicType: {
+                type: ['line', 'bar']
+            },
+            restore: {},
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+    },
+    yAxis: {
+        type: 'value',
+        axisLabel: {
+            formatter: '{value}百次'
+        }
+    },
+    series: [{
+        name: '百次',
+        type: 'line',
+        data: [1, 11, 5, 8, 4, 3, 10],
+    } ]
+};
+// 使用刚指定的配置项和数据显示图表。
+myChart.setOption(option);
+
+</script>
+<script type="text/javascript">
+var myChart1 = echarts.init(document.getElementById('main1'));
+option = {
+    title: {
+        text: '站点访问浏览器',
+        subtext: '纯属虚构',
+        x: 'center'
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'left',
+        data: ['firefox', 'Chrome', 'IE', 'UC', 'oprea']
+    },
+    series: [{
+        name: '访问来源',
+        type: 'pie',
+        radius: '55%',
+        center: ['50%', '60%'],
+        data: [{
+            value: 335,
+            name: 'firefox'
+        }, {
+            value: 310,
+            name: 'Chrome'
+        }, {
+            value: 234,
+            name: 'IE'
+        }, {
+            value: 135,
+            name: 'UC'
+        }, {
+            value: 52,
+            name: 'oprea'
+        }],
+        itemStyle: {
+            emphasis: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+        }
+    }]
+};
+
+myChart1.setOption(option);
+
+</script>
+{% endblock %}
+

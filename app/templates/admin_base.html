@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>StuBlog</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static' , filename='css.css')}}">
+        <link rel="shortcut icon" href="{{ url_for('static' , filename='favicon.ico')}}">
+        <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="{{url_for('static' , filename='js.js')}}"></script>
+    </head>
+
+    <body id="admin_body">
+        <div class="page-header">
+            <h1> <a href="/"><span style="font-size:12px">返回</span> StuBlog </a><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;后台管理系统</small></h1>
+        </div>
+        <div id="admin_side">
+            <div class="list-group">
+                <a class="list-group-item" id="admin_home" href="/admin"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp; 管理首页</a>
+                <!--<a class="list-group-item"  href="/"><span class="glyphicon glyphicon-plane"></span>&nbsp;&nbsp;&nbsp; 浏览站点</a>-->
+                <a class="list-group-item" id="admin_post" href="/admin_post"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp; 文章编辑</a>
+                <a class="list-group-item" id="admin_comment" href="/admin_comment"><span class="glyphicon glyphicon-comment"></span> &nbsp;&nbsp;&nbsp;评论管理</a>
+                <a class="list-group-item" id="admin_tags" href="/admin_tags"><span class="glyphicon glyphicon-tags"></span> &nbsp;&nbsp;&nbsp;标签管理</a>
+                <a class="list-group-item" id="admin_system" href="/admin_system"><span class="glyphicon glyphicon-cog"con glyphicon-home"></span>&nbsp;&nbsp;&nbsp; 系统设置</a>
+                <a class="list-group-item" id="admin_user" href="/admin_user"><span class="glyphicon glyphicon-user"></span> &nbsp;&nbsp;&nbsp;账户设置</a>
+                <a class="list-group-item" href="/admin_logout"><span class="glyphicon glyphicon-exclamation-sign"></span> &nbsp;&nbsp;&nbsp;退出</a>
+            </div>
+        </div>
+
+<div id="admin_content">
+        {% block content %}
+        {% endblock %}
+</div>
+<br>
+<br>
+<br>
+        <!--
+        <div id="foot">
+        <div class="well well-sm">或许单身是因为不明白芹菜与馒头的真谛</div>
+        </div>
+        -->
+    </body>
+
+</html>
+

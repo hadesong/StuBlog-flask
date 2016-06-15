@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>StuBlog</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static' , filename='css.css')}}">
+        <link rel="shortcut icon" href="{{ url_for('static' , filename='favicon.ico')}}">
+        <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </head>
+
+    <body id="main">
+        <div class="page-header" style="overflow:auto;">
+            <h1 style="float:left;"> <a href="/">StuBlog </a> <small>这是一首简单的小情歌</small></h1>
+            <div>
+                <input type="text" style="width:25%;float:right;" class="form-control" name="search" placeholder="找你妹...">
+            </div>
+        </div>
+        {% block body %}{% endblock %}
+        <br>
+        <br>
+        <br>
+        <div id="foot">
+            <div class="well well-sm">
+                <a href="/login"><img style="width:25px;" src="https://ooo.0o0.ooo/2016/06/12/575dd17875e50.png">&nbsp;&nbsp;登录</a>
+                <span>&nbsp;&nbsp;→_→或许单身是因为不明白芹菜与馒头的真谛 ←_←&nbsp;&nbsp; </span>
+                <a target="_blank" href="http://github.com/hadesong">Fork&nbsp;&nbsp;  <img style="width:25px" src="https://help.github.com/assets/images/site/invertocat.png"></a>
+            </div>
+        </div>
+        <a href="#" id="gotop" onclick="goTop();return false;">
+            <h1><span class="glyphicon glyphicon-upload"></span></h1>
+        </a>
+        <script type="text/javascript">
+        /**
+         * 回到页面顶部
+         * @param acceleration 加速度
+         * @param time 时间间隔 (毫秒)
+         **/
+        function goTop(acceleration, time) {
+            acceleration = acceleration || 0.1;
+            time = time || 16;
+
+            var x1 = 0;
+            var y1 = 0;
+            var x2 = 0;
+            var y2 = 0;
+            var x3 = 0;
+            var y3 = 0;
+
+            if (document.documentElement) {
+                x1 = document.documentElement.scrollLeft || 0;
+                y1 = document.documentElement.scrollTop || 0;
+            }
+            if (document.body) {
+                x2 = document.body.scrollLeft || 0;
+                y2 = document.body.scrollTop || 0;
+            }
+            var x3 = window.scrollX || 0;
+            var y3 = window.scrollY || 0;
+
+            // 滚动条到页面顶部的水平距离
+            var x = Math.max(x1, Math.max(x2, x3));
+            // 滚动条到页面顶部的垂直距离
+            var y = Math.max(y1, Math.max(y2, y3));
+
+            // 滚动距离 = 目前距离 / 速度, 因为距离原来越小, 速度是大于 1 的数, 所以滚动距离会越来越小
+            var speed = 1 + acceleration;
+            window.scrollTo(Math.floor(x / speed), Math.floor(y / speed));
+
+            // 如果距离不为零, 继续调用迭代本函数
+            if (x > 0 || y > 0) {
+                var invokeFunction = "goTop(" + acceleration + ", " + time + ")";
+                window.setTimeout(invokeFunction, time);
+            }
+        }
+
+        </script>
+    </body>
+
+</html>
+

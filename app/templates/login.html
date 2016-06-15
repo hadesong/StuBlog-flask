@@ -1,0 +1,22 @@
+{% extends 'base.html'%} {% block body%}
+<div class="jumbotron">
+    <div id="login">
+        <form action="/login" , method="post">
+            <h3 style="text-align:center"> <span class="glyphicon glyphicon-user"></span></h3>
+            <br>
+            <input type="text" class="form-control" placeholder="用户" name="username">
+            <br>
+            <input type="password" class="form-control " placeholder="密码 " name="password">
+            <br>
+            <font size="3" color="red">
+                {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %} {{ message }} {% endfor %} {% endif %} {% endwith %}
+            </font>
+            <button type="submit" style="float:right" class="btn btn-success">登录</button>
+        </form>
+        <br>
+        <br>
+        <br>
+    </div>
+</div>
+{% endblock %}
+

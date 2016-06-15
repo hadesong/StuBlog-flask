@@ -1,0 +1,17 @@
+{% extends 'admin_base.html' %} {% block content %}
+<script type="text/javascript">
+document.getElementById('admin_user').className = 'list-group-item active';
+
+</script>
+<div class="jumbotron">
+    <div style="width: 30% ; top:400px; margin:0 auto;">
+        用户名:
+        <input type="text" class="form-control" name="newname" placeholder=" "> 新密码:
+        <input type="password" class="form-control" name="newpaswd" placeholder=" "> 确认密码:
+        <input type="password" class="form-control" name="newpaswd" placeholder=" ">
+        <br>
+        <a class="btn btn-primary" href="#" role="button">更改密码</a>
+    </div>
+</div>
+{% endblock %}
+
