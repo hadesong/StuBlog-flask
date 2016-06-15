@@ -4,11 +4,17 @@
 
 ###主要功能
 
-1\首页文章列表展示 , ajax 获取分页 , 文章列表上下篇
+1\文章展示 :
 
-2\登录后台功能 : 若已登录则直接进入后台 , 若访问管理页时未登录重定向到登录页面
+		 ajax 获取分页 , 文章列表上下篇
 
-3\后台首页展示 : 本周访问量,站点访问浏览器(Echarts)(未关联数据..) , 原创文章数目(真实)
+2\登录后台功能 :
+
+		 若已登录则直接进入后台 , 若访问管理页时未登录重定向到登录页面
+
+3\后台首页展示 : 
+
+		本周访问量,站点访问浏览器(Echarts)(未关联数据..) , 原创文章数目(真实)
 
 4\文章编辑模块 : 
 
@@ -50,7 +56,7 @@
 		未做....
 
 
-screenshot
+####screenshot
 ![image](https://github.com/hadesong/StuBlog-flask/raw/master/app/static/screenshot/1.jpg)
 ![image](https://github.com/hadesong/StuBlog-flask/raw/master/app/static/screenshot/2.jpg)
 ![image](https://github.com/hadesong/StuBlog-flask/raw/master/app/static/screenshot/3.jpg)
