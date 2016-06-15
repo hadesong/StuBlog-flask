@@ -303,7 +303,8 @@ def delete_all():
 @app.route('/post' , methods=['GET'])
 def post():
     id = request.args.get('id')
-    if id:
+    try:
+        int(id)
         sql ="select * from blog_write where id=%s"%id
         #查询上一篇id
         previous_sql="select id from blog_write where id < %s order by id desc limit 1"%id
@@ -331,7 +332,10 @@ def post():
 
         if content:
             return render_template('post.html' , content=content , previous=previous ,next=next_)
-    return redirect('404')
+        else:
+            return redirect('404')
+    except:
+        return redirect('404')
 
 def db_list(cursor):
     content=[]
